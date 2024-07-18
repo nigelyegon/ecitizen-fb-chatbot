@@ -29,27 +29,39 @@ jobs:
           --health-retries=3
 
     env:
-      PYTHON_VERSION: '3.12'
+      PYTHON_VERSION: "3.12"
 
     steps:
-      - name: Checkout code
+      - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Start mysql server
+        run: |
+          sudo /etc/init.d/mysql start
+
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
         run: |
-          cd backend
+          cd backends
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run tests
         run: |
-          cd backend
-          pytest
+          coverage run -m pytest
+
+      - name: Generate coverage reports
+        run: |
+          coverage report -m
+
+      - name: Publish coverage report to coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
         run: |
