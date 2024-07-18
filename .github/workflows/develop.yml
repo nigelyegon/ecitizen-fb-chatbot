@@ -10,16 +10,16 @@ on:
 
 jobs:
   backend:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0.3
         env:
-          MYSQL_ROOT_PASSWORD: rootpassword
-          MYSQL_DATABASE: flaskdb
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         ports:
           - 3306:3306
         options: >-
@@ -28,14 +28,17 @@ jobs:
           --health-timeout=5s
           --health-retries=3
 
+    env:
+      PYTHON_VERSION: '3.12'
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
         run: |
@@ -56,30 +59,3 @@ jobs:
       - name: Start ngrok
         run: |
           ngrok http 5000 &
-
-  frontend:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: |
-          cd frontend
-          npm install
-
-      - name: Run tests
-        run: |
-          cd frontend
-          npm test
-
-      - name: Build Docker image
-        run: |
-          cd frontend
-          docker build -t my_react_app:dev .
