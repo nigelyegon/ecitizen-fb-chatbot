@@ -1,5 +1,0 @@
-Flask==2.1.2
-Flask-SQLAlchemy==2.5.1
-pymysql==1.0.2
-requests==2.25.1
-boto3==1.20.24
