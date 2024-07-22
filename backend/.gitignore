@@ -1,0 +1,31 @@
+# Virtual environment
+facebookBot/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Database files
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# MacOS files
+.DS_Store
+
+# Docker (if applicable)
+*.dockerignore
+Dockerfile
+docker-compose.yml
