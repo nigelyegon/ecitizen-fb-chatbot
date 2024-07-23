@@ -9,11 +9,11 @@ The dashboard will display metrics such as:
     
 """
 from flask import Blueprint, jsonify
-from app.models import Message
+from ..models import Message, db
 from sqlalchemy import func
-from app import db
 
 dashboard_bp = Blueprint('dashboard', __name__)
+
 
 @dashboard_bp.route('/metrics/messages_per_day', methods=['GET'])
 def messages_per_day():
@@ -24,6 +24,7 @@ def messages_per_day():
     result = [{'date': str(row.date), 'count': row.count} for row in data]
     return jsonify(result)
 
+
 @dashboard_bp.route('/metrics/responses_per_day', methods=['GET'])
 def responses_per_day():
     data = db.session.query(
@@ -32,6 +33,7 @@ def responses_per_day():
     ).filter(Message.response_text != '').group_by(func.date(Message.timestamp)).all()
     result = [{'date': str(row.date), 'count': row.count} for row in data]
     return jsonify(result)
+
 
 @dashboard_bp.route('/metrics/most_frequent_questions', methods=['GET'])
 def most_frequent_questions():

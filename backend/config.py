@@ -1,6 +1,8 @@
 import os
 
+
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mysql+pymysql://username:password@localhost/dbname'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or ('mysql+pymysql://root:linspace@localhost'
+                                                                 '/e_citizen_chatbot')
     SQLALCHEMY_TRACK_MODIFICATIONS = False

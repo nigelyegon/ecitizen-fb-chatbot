@@ -1,5 +1,6 @@
 from . import db
 
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.String(128), nullable=False)

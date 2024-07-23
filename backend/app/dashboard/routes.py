@@ -1,6 +1,7 @@
 from flask import render_template
-from . import dashboard_bp
+from .dashboard import dashboard_bp
 from ..models import Message
+
 
 @dashboard_bp.route('/')
 def index():
