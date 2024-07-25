@@ -4,7 +4,7 @@
 
 This project integrates the eCitizen Facebook page with ChatGPT to provide automated customer support
 
-[![Build and Deploy](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yaml/badge.svg?branch=develop)](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yaml)
+[![Build and Deploy](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yml/badge.svg?branch=develop)]
 
 ## Developer Technologies
 
