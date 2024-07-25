@@ -4,20 +4,22 @@
 
 This project integrates the eCitizen Facebook page with ChatGPT to provide automated customer support
 
-[![Build and Deploy](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yml/badge.svg?branch=develop)]
+![Build](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yml/badge.svg?branch=develop)
 
-## Developer Technologies
+## Prerequisite Technologies
 
-The host environment must have the following tools running
+The following tools should be preinstalled in the target host
 
-- [x] MySQL
-- [x] Docker
+- [x] MySQL version 8.0.36
+- [x] Docker version 27.1.1
+- [x] Python version 3.12.3
+- [x] Pip version 24.1.2
 
 ## Installation
 
 1. Clone the repository
-2. Navigate to the root directory of the cloned folder and launch your favorite terminal
-3. Activate your local environment
+2. Launch terminal and navigate to the root directory of the cloned folder
+3. Create and Activate virtual environment
 4. Navigate to `backend` folder
 
    `$ cd backend`
@@ -51,8 +53,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 ### Version 1 API Endpoints
 
-#### Parties Endpoints : `/api/v1/`
+#### Auth Endpoints
 
-| Method | Endpoint    | Functionality |
-| ------ | ----------- | ------------- |
-| `POST` | `/register` | Register User |
+| Method | Endpoint                | Functionality     |
+| ------ | ----------------------- | ----------------- |
+| `POST` | `/api/v1/auth/register` | User Registration |
