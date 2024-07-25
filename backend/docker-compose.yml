@@ -40,5 +40,5 @@ services:
       - chatbot-network
 
 networks:
-  dev-network:
+  chatbot-network:
     name: chatbot-network
