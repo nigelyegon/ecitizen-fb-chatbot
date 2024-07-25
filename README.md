@@ -4,7 +4,7 @@
 
 This project integrates the eCitizen Facebook page with ChatGPT to provide automated customer support
 
-![Build](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yml/badge.svg?branch=develop)
+![Build](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yml/badge.svg?branch=)
 
 ## Prerequisite Technologies
 
@@ -19,7 +19,7 @@ The following tools should be preinstalled in the target host
 
 1. Clone the repository
 2. Launch terminal and navigate to the root directory of the cloned folder
-3. Create and Activate virtual environment
+3. Create and activate a virtual environment
 4. Navigate to `backend` folder
 
    `$ cd backend`
@@ -30,7 +30,8 @@ The following tools should be preinstalled in the target host
 
 #### Configuring environment variables
 
-Create your `.env` file in the `backend` directory and add the following variables
+1. Create an `.env file` in the `backend` directory
+2. Add the following variables
 
 ```
 CONFIG_MODE=development
