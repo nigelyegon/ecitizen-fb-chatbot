@@ -1,4 +1,4 @@
-from . import db
+from extensions import db
 
 
 class Message(db.Model):
@@ -10,3 +10,13 @@ class Message(db.Model):
 
     def __repr__(self):
         return f"<Message {self.id}>"
+
+
+class User(db.Model):
+    # customize the table name
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(128), nullable=False, unique=True)
+    password = db.Column(db.String(128), nullable=False)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp())
