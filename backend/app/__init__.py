@@ -1,23 +1,36 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-# from ..config import Config
-from backend.config import Config
-
-db = SQLAlchemy()
+from config import config
 
 
-def create_app():
+def create_app(config_name):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config[config_name])
+    register_blueprints(app)
+    initialize_extensions(app)
+    return app
+
+
+# ---------------------------------------------
+# helper functions
+# ---------------------------------------------
+def initialize_extensions(app):
+    from extensions import db, migrate
 
     db.init_app(app)
-
-    with app.app_context():
-        from . import routes, models
-        from backend.app.dashboard.dashboard import dashboard_bp
-        app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
-        from .routes import route_bp  # webhook route
-        app.register_blueprint(route_bp, url_prefix='/api/v1/')
+    with app.app_context() as context:
+        context.push()
         db.create_all()
+    migrate.init_app(app)
 
-    return app
+
+def register_blueprints(app):
+    from .api.auth.views import auth_blueprint
+    from .api.facebook_api.views import facebook_api_bp
+    from .api.dashboard.views import dashboard_bp
+
+    # Auth blueprint
+    app.register_blueprint(auth_blueprint, url_prefix="/api/v1")
+    # Facebook webhook blueprint
+    app.register_blueprint(facebook_api_bp, url_prefix="/api/v1")
+    # Dashboard blueprint
+    app.register_blueprint(dashboard_bp, url_prefix="/api/v1")

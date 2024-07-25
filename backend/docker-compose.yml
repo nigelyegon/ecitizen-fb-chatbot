@@ -1,0 +1,44 @@
+services:
+  api:
+    image: ecitizen-fb-chatbot-api:latest
+    container_name: api
+    ports:
+      - "5000:5000"
+    environment:
+      CONFIG_MODE: development
+      DEVELOPMENT_DATABASE_URL: mysql+pymysql://admin:admin123@db/ecitizen-fb-chatbot-db
+      TEST_DATABASE_URL: mysql+pymysql://admin:admin123@db/ecitizen-fb-chatbot-test-db
+      SQLALCHEMY_TRACK_MODIFICATIONS: False
+
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db:db
+    networks:
+      - chatbot-network
+
+  db:
+    image: mysql:8.0.36
+    container_name: db
+    cap_add:
+      - SYS_NICE
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecitizen-fb-chatbot-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    networks:
+      - chatbot-network
+
+networks:
+  dev-network:
+    name: chatbot-network

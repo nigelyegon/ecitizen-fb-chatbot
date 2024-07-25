@@ -2,7 +2,38 @@ import os
 
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or ('mysql+pymysql://root:linspace@localhost'
-                                                                 '/e_citizen_chatbot')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # SQLALCHEMY_TRACK_MODIFICATIONS:
+    # A configuration to enable or disable tracking modifications of objects.
+    # You set it to False to disable tracking and use less memory
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    DEBUG = True
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = os.environ["DEVELOPMENT_DATABASE_URL"]
+
+
+class DevelopmentConfig(Config):
+    DEVELOPMENT = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = os.environ["SQLALCHEMY_TRACK_MODIFICATIONS"]
+
+
+class TestingConfig(Config):
+    Testing = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = os.environ["SQLALCHEMY_TRACK_MODIFICATIONS"]
+    SQLALCHEMY_DATABASE_URI = os.environ["TEST_DATABASE_URL"]
+
+
+class StagingConfig(Config):
+    DEVELOPMENT = True
+
+
+class ProductionConfig(Config):
+    PRODUCTION = True
+    DEBUG = False
+
+
+config = {
+    "development": DevelopmentConfig,
+    "testing": TestingConfig,
+    "staging": StagingConfig,
+    "production": ProductionConfig,
+}
