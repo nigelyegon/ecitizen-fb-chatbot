@@ -1,10 +1,12 @@
 alembic==1.13.2
+bcrypt==4.2.0
 blinker==1.8.2
 cffi==1.16.0
 click==8.1.7
 coverage==7.6.0
 cryptography==43.0.0
 Flask==3.0.3
+Flask-Bcrypt==1.0.1
 Flask-Migrate==4.0.7
 Flask-SQLAlchemy==3.1.1
 greenlet==3.0.3
