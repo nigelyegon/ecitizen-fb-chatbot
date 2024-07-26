@@ -14,13 +14,14 @@ def create_app(config_name):
 # helper functions
 # ---------------------------------------------
 def initialize_extensions(app):
-    from extensions import db, migrate
+    from extensions import db, migrate, bcrypt
 
     db.init_app(app)
     with app.app_context() as context:
         context.push()
         db.create_all()
     migrate.init_app(app)
+    bcrypt.init_app(app)
 
 
 def register_blueprints(app):
