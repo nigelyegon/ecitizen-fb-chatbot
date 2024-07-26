@@ -23,3 +23,24 @@ def register():
     except exc.IntegrityError as e:
         db.session.rollback()
         return make_response({"message": e.orig.args[1], "code": 400}, 400)
+
+
+@auth_blueprint.route("/auth/login", methods=["POST"])
+def login():
+    req = request.get_json()
+    password = req.get("password")
+    email = req.get("email")
+    try:
+        user = User.query.where(User.email == email).first()
+
+        if user:
+            if bcrypt.check_password_hash(user.password, password):
+
+                return make_response(
+                    {"message": "User authentication successful", "code": 200}, 200
+                )
+        return make_response({"message": "Wrong login credentials!", "code": 401}, 401)
+
+    except exc.IntegrityError as e:
+        db.session.rollback()
+        return make_response({"message": e.orig.args[1], "code": 400}, 400)

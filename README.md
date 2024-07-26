@@ -29,6 +29,7 @@ The following tools should be preinstalled in the target host
    `$ pip install -r requirements.txt`
 
 #### Database Setup
+
 Create the database `your-development-db` in the host machine
 
 #### Configuring environment variables
@@ -51,7 +52,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 `$ coverage run -m pytest`
 
-#### Analyze Code Coverage
+#### Code Coverage Analysis
 
 `$ coverage report`
 
@@ -59,6 +60,45 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 #### Auth Endpoints
 
-| Method | Endpoint                | Functionality     |
-| ------ | ----------------------- | ----------------- |
-| `POST` | `/api/v1/auth/register` | User Registration |
+| Method | Endpoint                | Functionality                                                      |
+| ------ | ----------------------- | ------------------------------------------------------------------ |
+| `POST` | `/api/v1/auth/register` | `User Registration:` Creates a new system user                     |
+| `POST` | `/api/v1/auth/login`    | `User Authentication:` Authenticates a user with login credentials |
+
+#### Server Requests and Responses
+
+##### Sample user registration request body
+
+```json
+{
+  "email": "test@ecitizen.co.ke",
+  "password": "testpassword"
+}
+```
+
+##### Sample user registration success response body
+
+```json
+{
+  "code": 201,
+  "message": "User registration successful"
+}
+```
+
+##### Sample user authentication request body
+
+```json
+{
+  "email": "test@ecitizen.co.ke",
+  "password": "testpassword"
+}
+```
+
+##### Sample user authentication success response body
+
+```json
+{
+  "code": 200,
+  "message": "User authentication successful"
+}
+```
