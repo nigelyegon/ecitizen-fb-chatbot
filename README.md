@@ -28,6 +28,9 @@ The following tools should be preinstalled in the target host
 
    `$ pip install -r requirements.txt`
 
+#### Database Setup
+Create the database `your-development-db` in the host machine
+
 #### Configuring environment variables
 
 1. Create an `.env file` in the `backend` directory
