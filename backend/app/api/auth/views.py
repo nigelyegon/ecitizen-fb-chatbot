@@ -1,6 +1,8 @@
 from flask import Blueprint, request, make_response
+from flask_jwt_extended import create_access_token
 from sqlalchemy import exc
 from extensions import db, bcrypt
+
 
 from app.models import User
 
@@ -35,9 +37,14 @@ def login():
 
         if user:
             if bcrypt.check_password_hash(user.password, password):
-
+                token = create_access_token(identity=email)
                 return make_response(
-                    {"message": "User authentication successful", "code": 200}, 200
+                    {
+                        "message": "User authentication successful",
+                        "code": 200,
+                        "access_token": token,
+                    },
+                    200,
                 )
         return make_response({"message": "Wrong login credentials!", "code": 401}, 401)
 

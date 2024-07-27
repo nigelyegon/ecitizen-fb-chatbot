@@ -34,7 +34,7 @@ Create the database `your-development-db` in the host machine
 
 #### Configuring environment variables
 
-1. Create an `.env file` in the `backend` directory
+1. Create an `.env` file in the `backend` directory
 2. Add the following variables
 
 ```
@@ -99,6 +99,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 ```json
 {
   "code": 200,
-  "message": "User authentication successful"
+  "message": "User authentication successful",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjAxMDg0NCwianRpIjoiMTQ3PjQ5YTAtNGY1ZS00MzhiLWE2NjgtNTHzNTdiM2JmNGQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluQGVjaXRpemVuLmNvbSIsIk5iZiI6MTcyMjAxMDg0NCwiY3NyZiI6IjE5ZTNkMDQ3LTY5ZWUtNGJjZC04ZDU0LTYzNjlmMjEzYTAzMiIsImV4cCI6MTcyMjAxMTc0NH0.DxcdXquE7iimUaGs_NmbIomypQ3nxaqCL5pQTBhbeRb"
 }
 ```
