@@ -14,7 +14,7 @@ def create_app(config_name):
 # helper functions
 # ---------------------------------------------
 def initialize_extensions(app):
-    from extensions import db, migrate, bcrypt
+    from extensions import db, migrate, bcrypt, jwt
 
     db.init_app(app)
     with app.app_context() as context:
@@ -22,6 +22,7 @@ def initialize_extensions(app):
         db.create_all()
     migrate.init_app(app)
     bcrypt.init_app(app)
+    jwt.init_app(app)
 
 
 def register_blueprints(app):
