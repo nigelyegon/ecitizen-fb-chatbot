@@ -11,8 +11,16 @@ The dashboard will display metrics such as:
 from flask import Blueprint, jsonify
 from app.models import Message, db
 from sqlalchemy import func
+from flask_jwt_extended import jwt_required
+
 
 dashboard_bp = Blueprint("dashboard", __name__)
+
+
+@dashboard_bp.route("/", methods=["GET"])
+@jwt_required()
+def index():
+    return {"message": "Welcome to eCitizen Facebook chatbot"}, 200
 
 
 @dashboard_bp.route("/metrics/messages_per_day", methods=["GET"])
