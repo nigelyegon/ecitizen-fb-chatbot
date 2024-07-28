@@ -11,7 +11,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ["DEVELOPMENT_DATABASE_URL"]
     SECRET_KEY = os.environ["SECRET_KEY"]
     JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
-    JWT_TOKEN_LOCATION = os.environ["JWT_TOKEN_LOCATION"]
+    JWT_BLACKLIST_ENABLED = os.environ["JWT_BLACKLIST_ENABLED"]
+    JWT_BLACKLIST_TOKEN_CHECKS = os.environ["JWT_BLACKLIST_TOKEN_CHECKS"]
 
 
 class DevelopmentConfig(Config):

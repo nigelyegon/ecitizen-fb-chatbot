@@ -1,5 +1,7 @@
 from flask import Flask
 from config import config
+from extensions import jwt
+from .models import RevokedToken
 
 
 def create_app(config_name):
@@ -14,7 +16,7 @@ def create_app(config_name):
 # helper functions
 # ---------------------------------------------
 def initialize_extensions(app):
-    from extensions import db, migrate, bcrypt, jwt
+    from extensions import db, migrate, bcrypt
 
     db.init_app(app)
     with app.app_context() as context:
@@ -31,8 +33,14 @@ def register_blueprints(app):
     from .api.dashboard.views import dashboard_bp
 
     # Auth blueprint
-    app.register_blueprint(auth_blueprint, url_prefix="/api/v1")
+    app.register_blueprint(auth_blueprint, url_prefix="/api/v1/chatbot")
     # Facebook webhook blueprint
-    app.register_blueprint(facebook_api_bp, url_prefix="/api/v1")
+    app.register_blueprint(facebook_api_bp, url_prefix="/api/v1/chatbot")
     # Dashboard blueprint
-    app.register_blueprint(dashboard_bp, url_prefix="/api/v1")
+    app.register_blueprint(dashboard_bp, url_prefix="/api/v1/chatbot")
+
+
+@jwt.token_in_blocklist_loader
+def check_if_token_in_blacklist(self, decrypt_token):
+    jti = decrypt_token["jti"]
+    return RevokedToken.is_token_blacklisted(jti)

@@ -60,10 +60,12 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 #### Auth Endpoints
 
-| Method | Endpoint                | Functionality                                                      |
-| ------ | ----------------------- | ------------------------------------------------------------------ |
-| `POST` | `/api/v1/auth/register` | `User Registration:` Creates a new system user                     |
-| `POST` | `/api/v1/auth/login`    | `User Authentication:` Authenticates a user with login credentials |
+| Method | Endpoint                        | Functionality                                                           |
+| ------ | ------------------------------- | ----------------------------------------------------------------------- |
+| `POST` | `/api/v1/chatbot/auth/register` | `User Registration:` Creates a new system user                          |
+| `POST` | `/api/v1/chatbot/auth/login`    | `User Authentication:` Authenticates a user with login credentials      |
+| `GET`  | `/api/v1/chatbot`               | `Landing Page:` This is the landing page upon successful authentication |
+| `POST` | `/api/v1/chatbot/logout`        | `User Logout:` Revokes user access to the system                        |
 
 #### Server Requests and Responses
 
@@ -101,5 +103,22 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
   "code": 200,
   "message": "User authentication successful",
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjAxMDg0NCwianRpIjoiMTQ3PjQ5YTAtNGY1ZS00MzhiLWE2NjgtNTHzNTdiM2JmNGQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluQGVjaXRpemVuLmNvbSIsIk5iZiI6MTcyMjAxMDg0NCwiY3NyZiI6IjE5ZTNkMDQ3LTY5ZWUtNGJjZC04ZDU0LTYzNjlmMjEzYTAzMiIsImV4cCI6MTcyMjAxMTc0NH0.DxcdXquE7iimUaGs_NmbIomypQ3nxaqCL5pQTBhbeRb"
+}
+```
+
+##### Sample user logout success response body
+
+```json
+{
+  "code": 200,
+  "message": "logout successful"
+}
+```
+
+##### Sample unauthorized access response with revoked access token
+
+```json
+{
+  "msg": "Token has been revoked"
 }
 ```

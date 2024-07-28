@@ -1,10 +1,9 @@
-from flask import Blueprint, request, make_response
-from flask_jwt_extended import create_access_token
+from flask import Blueprint, request
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 from sqlalchemy import exc
-from extensions import db, bcrypt
 
 
-from app.models import User
+from app.models import User, RevokedToken
 
 
 auth_blueprint = Blueprint("auth_blueprint", __name__)
@@ -13,18 +12,16 @@ auth_blueprint = Blueprint("auth_blueprint", __name__)
 @auth_blueprint.route("/auth/register", methods=["POST"])
 def register():
     req = request.get_json()
-    pswd = req.get("password")
-    hashed_password = bcrypt.generate_password_hash(pswd).decode("utf-8")
+    password = req.get("password")
     email = req.get("email")
-    user = User(email=email, password=hashed_password)
+    user = User(email=email, password=User.generate_hash(password))
     try:
-        db.session.add(user)
-        db.session.commit()
-        return make_response({"message": "User created successfully", "code": 201}, 201)
+        user.save()
+        return {"message": "User created successfully", "code": 201}, 201
 
     except exc.IntegrityError as e:
-        db.session.rollback()
-        return make_response({"message": e.orig.args[1], "code": 400}, 400)
+        user.undo()
+        return {"message": e.orig.args[1], "code": 400}, 400
 
 
 @auth_blueprint.route("/auth/login", methods=["POST"])
@@ -32,22 +29,32 @@ def login():
     req = request.get_json()
     password = req.get("password")
     email = req.get("email")
+    user = User.find_user_by_email(email)
     try:
-        user = User.query.where(User.email == email).first()
-
         if user:
-            if bcrypt.check_password_hash(user.password, password):
+            if User.verify_hash(user.password, password):
                 token = create_access_token(identity=email)
-                return make_response(
-                    {
-                        "message": "User authentication successful",
-                        "code": 200,
-                        "access_token": token,
-                    },
-                    200,
-                )
-        return make_response({"message": "Wrong login credentials!", "code": 401}, 401)
+
+                return {
+                    "message": "User authentication successful",
+                    "code": 200,
+                    "access_token": token,
+                }, 200
+        return {"message": "Wrong login credentials!", "code": 401}, 401
 
     except exc.IntegrityError as e:
-        db.session.rollback()
-        return make_response({"message": e.orig.args[1], "code": 400}, 400)
+        User.undo()
+        return {"message": e.orig.args[1], "code": 400}, 400
+
+
+@auth_blueprint.route("/auth/logout", methods=["POST"])
+@jwt_required()
+def logout():
+    jti = get_jwt()["jti"]
+
+    try:
+        RevokedToken(jti=jti).save()
+
+        return {"message": "logout successful", "code": 200}, 200
+    except Exception as e:
+        return {"message": "Error"}, 400
