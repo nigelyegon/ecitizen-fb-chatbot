@@ -60,12 +60,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 #### Auth Endpoints
 
-| Method | Endpoint                        | Functionality                                                           |
-| ------ | ------------------------------- | ----------------------------------------------------------------------- |
-| `POST` | `/api/v1/chatbot/auth/register` | `User Registration:` Creates a new system user                          |
-| `POST` | `/api/v1/chatbot/auth/login`    | `User Authentication:` Authenticates a user with login credentials      |
-| `GET`  | `/api/v1/chatbot`               | `Landing Page:` This is the landing page upon successful authentication |
-| `POST` | `/api/v1/chatbot/logout`        | `User Logout:` Revokes user access to the system                        |
+| Method | Endpoint                        | Functionality                               |
+| ------ | ------------------------------- | ------------------------------------------- |
+| `POST` | `/api/v1/chatbot/auth/register` | `User Registration:` Creates a new user     |
+| `POST` | `/api/v1/chatbot/auth/login`    | `User Authentication:` Authenticates a user |
+| `GET`  | `/api/v1/chatbot`               | `Index Page:` The landing page route        |
+| `POST` | `/api/v1/chatbot/logout`        | `User Logout:` Revokes user access          |
+| `POST` | `/api/v1/chatbot/auth/refresh`  | `Refresh:` Regenerates user access tokens   |
 
 #### Server Requests and Responses
 
@@ -82,7 +83,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 ```json
 {
-  "code": 201,
+  "status_code": 201,
   "message": "User registration successful"
 }
 ```
@@ -100,9 +101,10 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 ```json
 {
-  "code": 200,
+  "status_code": 200,
   "message": "User authentication successful",
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjAxMDg0NCwianRpIjoiMTQ3PjQ5YTAtNGY1ZS00MzhiLWE2NjgtNTHzNTdiM2JmNGQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluQGVjaXRpemVuLmNvbSIsIk5iZiI6MTcyMjAxMDg0NCwiY3NyZiI6IjE5ZTNkMDQ3LTY5ZWUtNGJjZC04ZDU0LTYzNjlmMjEzYTAzMiIsImV4cCI6MTcyMjAxMTc0NH0.DxcdXquE7iimUaGs_NmbIomypQ3nxaqCL5pQTBhbeRb"
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjAxMDg0NCwianRpIjoiMTQ3PjQ5YTAtNGY1ZS00MzhiLWE2NjgtNTHzNTdiM2JmNGQ2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImFkbWluQGVjaXRpemVuLmNvbSIsIk5iZiI6MTcyMjAxMDg0NCwiY3NyZiI6IjE5ZTNkMDQ3LTY5ZWUtNGJjZC04ZDU0LTYzNjlmMjEzYTAzMiIsImV4cCI6MTcyMjAxMTc0NH0.DxcdXquE7iimUaGs_NmbIomypQ3nxaqCL5pQTBhbeRb",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCIoZmFsc2UsImlhdCI6MTcytjIxNjYwMywianRpJjoiYWRlYzkyNzMtZjUzZi00OWMxLWFmMmItMDkwZDcyOGU0ODFlIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJhZG1pbkBlY2l0aXplbi5jb20iLCJuYmYiOjE3MjIyMTY2MDMsImNzcmYiOiI3MDcyMjMyYS03MjA4LTRiOWQtYjllYi1jODZiYTEzNDU4YWEiLCJleNAiOjE3MjQ4MDg2MDN9.Q79STusDl1E8bnrGWEcAHzsdrFHLVRdJw3rTVTT1hpx"
 }
 ```
 
@@ -110,7 +112,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 ```json
 {
-  "code": 200,
+  "status_code": 200,
   "message": "logout successful"
 }
 ```
@@ -120,5 +122,22 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 ```json
 {
   "msg": "Token has been revoked"
+}
+```
+
+##### Sample unauthorized access response with expired access token
+
+```json
+{
+  "msg": "Token has expired"
+}
+```
+
+##### Sample access token regeneration using refresh tokens
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUrI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMjIxOTQxNCwianRpIjoiM2Q5MDY3N2QtMmM2Yi00ZDY1LWFkODctMzM3MjBkODJkNDYyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImBkbWluQGVjaXRpemVuLmNvbSIsIm5iZiI6MTcyMjIx8TQxNCwiY3NyZiI6IjZiMPk1NWE0LWM2ZjYtNDFjNi04ZWQwLTA2MGQ3ZDliMjQxYSIsImV4cCI6MTcyMjIyMDMxNH0.w49lTF6RmkZSlybJKWBcNPhlvtEdkN3atPODu05F5AX",
+  "status_code": 200
 }
 ```
