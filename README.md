@@ -2,7 +2,7 @@
 
 ## API
 
-This project integrates the eCitizen Facebook page with ChatGPT to provide automated customer support
+This project integrates the eCitizen Facebook page with AI Model to provide automated customer support
 
 ![Build](https://github.com/ecitizen-ke/ecitizen-fb-chatbot/actions/workflows/develop.yml/badge.svg?branch=)
 
