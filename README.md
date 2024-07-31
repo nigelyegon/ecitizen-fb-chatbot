@@ -55,13 +55,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 1. Create an `pytest.ini` file in the `backend` directory
 2. Add the following variables
 
-```json
+```
 [pytest]
 addopts = -p no:warnings
 env=
     CONFIG_MODE=testing
     TEST_DATABASE_URL=mysql+pymysql://user:password@localhost:3306/your-test-db
-    DEVELOPMENT_DATABASE_URL==mysql+pymysql://user:password@localhost:3306/your-development-db
+    DEVELOPMENT_DATABASE_URL=''
     SQLALCHEMY_TRACK_MODIFICATIONS=False
     SECRET_KEY=my-sweet-secret-do-not-tell
     JWT_SECRET_KEY=my-sweet-jwt-secret-do-not-tell
