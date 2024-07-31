@@ -50,7 +50,26 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 #### Testing
 
-`$ coverage run -m pytest`
+##### Configuring test environment variables
+
+1. Create an `pytest.ini` file in the `backend` directory
+2. Add the following variables
+
+```json
+[pytest]
+addopts = -p no:warnings
+env=
+    CONFIG_MODE=testing
+    TEST_DATABASE_URL=mysql+pymysql://user:password@localhost:3306/your-test-db
+    DEVELOPMENT_DATABASE_URL==mysql+pymysql://user:password@localhost:3306/your-development-db
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SECRET_KEY=my-sweet-secret-do-not-tell
+    JWT_SECRET_KEY=my-sweet-jwt-secret-do-not-tell
+    JWT_BLACKLIST_ENABLED=True
+    JWT_BLACKLIST_TOKEN_CHECKS="['access', 'refresh']"
+```
+
+`$ coverage run -m pytest -v`
 
 #### Code Coverage Analysis
 
@@ -65,7 +84,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS=False
 | `POST` | `/api/v1/chatbot/auth/register` | `User Registration:` Creates a new user     |
 | `POST` | `/api/v1/chatbot/auth/login`    | `User Authentication:` Authenticates a user |
 | `GET`  | `/api/v1/chatbot`               | `Index Page:` The landing page route        |
-| `POST` | `/api/v1/chatbot/logout`        | `User Logout:` Revokes user access          |
+| `POST` | `/api/v1/chatbot/auth/logout`   | `User Logout:` Revokes user access          |
 | `POST` | `/api/v1/chatbot/auth/refresh`  | `Refresh:` Regenerates user access tokens   |
 
 #### Server Requests and Responses
