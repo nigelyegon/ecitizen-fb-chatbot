@@ -25,6 +25,7 @@ def initialize_extensions(app):
     migrate.init_app(app)
     bcrypt.init_app(app)
     jwt.init_app(app)
+    # cors.init_app(app)
 
 
 def register_blueprints(app):
