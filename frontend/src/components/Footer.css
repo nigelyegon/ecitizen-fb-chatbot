@@ -1,0 +1,28 @@
+/* src/Footer.css */
+
+.footer {
+    background-color: white;
+    color: #333;    
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-left: 290px;
+}
+
+.footer nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
