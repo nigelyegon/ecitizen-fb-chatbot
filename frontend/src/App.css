@@ -2,6 +2,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .app {
@@ -19,6 +20,7 @@ body {
   top: 0;
   overflow: auto;
   transition: transform 0.3s ease;
+  z-index: 999;
 }
 
 .sidebar h2 {
@@ -42,7 +44,6 @@ body {
 .main-content {
   margin-left: 250px;
   padding: 20px;
-
   flex-grow: 1;
   transition: margin-left 0.3s ease;
 }
