@@ -1,0 +1,42 @@
+/* src/Theme.css */
+.app-light {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --card-bg: #ffffff;
+  }
+  
+  .app-dark {
+    --bg-color: #333;
+    --text-color: #f4f4f4;
+    --card-bg: #444;
+  }
+  
+  .app {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .card {
+    background-color: var(--card-bg);
+  }
+  
+  /* Add more theme-specific styles as needed */
+  /* src/Theme.css */
+.app-dark-blue {
+    --bg-color: #1a2b3c;
+    --text-color: #f4f4f4;
+    --card-bg: #2c3e50;
+  }
+  
+  .app-dark-green {
+    --bg-color: #1c3b1f;
+    --text-color: #f4f4f4;
+    --card-bg: #2e5a34;
+  }
+  
+  .app-dark-purple {
+    --bg-color: #2e1c3b;
+    --text-color: #f4f4f4;
+    --card-bg: #4a2e5a;
+  }
+ 

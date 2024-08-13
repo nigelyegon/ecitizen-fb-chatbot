@@ -1,0 +1,148 @@
+.login-container {
+  display: flex;
+}
+
+.left {
+  width: 50%;
+}
+
+.right {
+  width: 50%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-form-wrapper {
+  padding: 50px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 200px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.coat-of-arms {
+  height: 70px;
+  margin-right: 5px;
+}
+
+.ecitizen-logo {
+  height: 70px;
+  max-width: 70%;
+  object-fit: contain;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.facebook-logo {
+  height: 30px;
+}
+
+img {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 70%;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.show-password-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+}
+
+button[type="submit"] {
+  padding: 10px 15px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) {
+  .left {
+    width: 30%;
+  }
+  .right {
+    width: 70%;
+  }
+}
+
+/* Smartphone styles */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .left {
+    display: none;
+  }
+  .right {
+    width: 100%;
+  }
+  .login-form-wrapper {
+    padding: 20px;
+  }
+  .ecitizen-logo {
+    display: none;
+  }
+}
