@@ -132,6 +132,9 @@ venv.bak/
 .spyderproject
 .spyproject
 
+pytest.ini
+requirements.txt
+
 # Rope project settings
 .ropeproject
 
