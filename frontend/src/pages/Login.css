@@ -1,68 +1,45 @@
 .login-container {
   display: flex;
-}
-
-.left {
-  width: 50%;
-}
-
-.right {
-  width: 50%;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.login-form-wrapper {
-  padding: 50px;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 200px;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.coat-of-arms {
-  height: 70px;
-  margin-right: 5px;
-}
-
-.ecitizen-logo {
-  height: 70px;
-  max-width: 70%;
-  object-fit: contain;
-}
-
-.logo {
-  height: 50px;
-  margin-right: 10px;
-}
-
-.facebook-logo {
-  height: 30px;
-}
-
-img {
-  height: 100vh;
-  width: 100%;
-  object-fit: cover;
+  margin-top: 2.5%;
 }
 
 h2 {
   margin-bottom: 20px;
   text-align: center;
+  font-weight: 200;
+}
+
+.login-form-wrapper {
+  padding: 50px;
+  width: 100%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.banner-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 100px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.banner {
+  height: 70px;
+}
+
+img {
+  object-fit: contain;
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: center;
+  width: 40%;
 }
 
 .form-group {
@@ -96,20 +73,22 @@ form {
   background: none;
   border: none;
   cursor: pointer;
-  color: #007bff;
+  color: #008c51;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: #008c51;
+
   border: none;
   border-radius: 4px;
   color: white;
   cursor: pointer;
+  width: 20%;
 }
 
-button[type="submit"]:hover {
-  background-color: #0056b3;
+button[type='submit']:hover {
+  background-color: #25cf88;
 }
 
 .error-message {
@@ -120,11 +99,11 @@ button[type="submit"]:hover {
 
 /* Tablet styles */
 @media (max-width: 1024px) {
-  .left {
+  /* .left {
     width: 30%;
-  }
+  } */
   .right {
-    width: 70%;
+    width: 100%;
   }
 }
 
