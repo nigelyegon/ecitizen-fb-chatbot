@@ -1,16 +1,26 @@
-# ecitizen_chatbot_admin_dashboard
-admin dashboard for facebook chatbot
+# Ecitizen Facebook Chatbot
 
-# Getting Started with Create React App
-clone the repository then `cd  to ecitizen_chatbot_admin_dashboard`
+## Frontend
 
-## dependancies
--- install nodejs
--- npm install react-router-dom
--- npm install chart.js@^4.0.0 react-chartjs-2@^5.0.0
+## Prerequisite Technologies
 
-## to run the application
--- `npm start`
+The following tools should be preinstalled in the target host
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [x] NodeJS v20.16.0
+- [x] NPM version 10.8.1
+
+## Installation
+
+1. Clone the repository
+2. Launch terminal and navigate to the root directory of the cloned folder
+3. Navigate to `frontend` folder
+
+   `$ cd frontend`
+
+4. Install project dependencies
+
+   `$ npm install`
+
+## Running(Developer Mode)
+
+`$ npm run dev`
