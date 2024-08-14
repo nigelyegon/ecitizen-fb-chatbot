@@ -1,5 +1,5 @@
 // src/pages/Home.js
-import React, { useEffect, useState } from 'react'; // Importing React and the useState hook
+import React, { useContext, useEffect, useState } from 'react'; // Importing React and the useState hook
 import Sidebar from '../components/Sidebar'; // Importing the Sidebar component
 import Header from '../components/navbar/Navbar'; // Importing the Header component
 import Card from '../components/card/Card'; // Importing the Card component
@@ -8,19 +8,22 @@ import { useTheme } from '../contexts/ThemeContext'; // Importing the useTheme c
 import '../App.css'; // Importing the main application CSS
 import '../Theme.css'; // Importing the theme-specific CSS
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext';
 
 const Home = () => {
+  const { isAuth } = useContext(AuthContext);
+
   // Home component definition
   const [sidebarOpen, setSidebarOpen] = useState(false); // State for managing the sidebar's open/closed state
   const { theme, toggleTheme } = useTheme(); // Using the custom hook to get the current theme and the function to toggle it
   const navigate = useNavigate(); // Using the navigate hook to navigate between routes
+
   useEffect(() => {
-    const access_token = localStorage.getItem('access_token');
-    if (!access_token) {
+    if (!isAuth) {
       navigate('/login');
-    } else {
     }
-  }, [navigate]);
+  }, [isAuth]);
+
   const toggleSidebar = () => {
     // Function to toggle the sidebar's open/closed state
     setSidebarOpen(!sidebarOpen); // Toggle the state value

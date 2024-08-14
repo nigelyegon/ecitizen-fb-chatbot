@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import './Login.css';
-import banner from '../assets/banner.svg';
-import AuthContext from '../contexts/AuthContext';
+import banner from '../../assets/banner.svg';
+import AuthContext from '../../contexts/AuthContext';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
