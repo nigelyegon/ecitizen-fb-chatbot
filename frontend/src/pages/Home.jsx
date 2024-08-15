@@ -9,18 +9,30 @@ import '../App.css'; // Importing the main application CSS
 import '../Theme.css'; // Importing the theme-specific CSS
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
+import { jwtDecode } from 'jwt-decode';
 
 const Home = () => {
-  const { isAuth } = useContext(AuthContext);
+  const { isAuth, token, setIsAuth } = useContext(AuthContext);
 
   // Home component definition
   const [sidebarOpen, setSidebarOpen] = useState(false); // State for managing the sidebar's open/closed state
   const { theme, toggleTheme } = useTheme(); // Using the custom hook to get the current theme and the function to toggle it
   const navigate = useNavigate(); // Using the navigate hook to navigate between routes
 
+  const { iat, exp } = jwtDecode(token);
+
+  // Token validity duration in seconds
+  const TIME_OUT = exp - iat;
+
   useEffect(() => {
     if (!isAuth) {
       navigate('/login');
+    } else {
+      const interval = setInterval(() => {
+        setIsAuth(false);
+        navigate('/login');
+      }, TIME_OUT * 1000);
+      return () => clearInterval(interval);
     }
   }, [isAuth]);
 
